@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    :root {
+      --primary-color: oklch(0.7 0.37 220);
+      --foreground-color: oklch(1.0 0 0);
+    }
+
+
+    button {
+      --bg-color: var(--foreground-color);
+      --fg-color: var(--primary-color);
+
+      padding: 0.5rem 0.75rem;
+      background-color: var(--bg-color);
+      border: 1px solid;
+      color: var(--fg-color);
+      border-radius: 0.5rem;
+      font-size: 1rem;
+      transition: 300ms;
+    }
+
+    button:hover {
+      background-color: var(--fg-color);
+      color: var(--bg-color);
+    }
+
+    button.warning {
+      --fg-color: oklch(0.67 0.22 32); /* Red button */
+    }
+
+    button.action {
+      --fg-color: oklch(0.67 0.21 133); /* Green button */
+    }
+
+    button.invert {
+      color: var(--bg-color);
+      background-color: var(--fg-color);
+    }
+
+    button.invert:hover {
+      background-color:var(--bg-color);
+      color: var(--fg-color);
+    }
+
+  </style>
+</head>
+<body>
+  
+
+  <button>Login</button>
+  <button class="warning">Log out</button>
+  <button class="action">Preferences</button>
+  <button class="warning invert">Delete</button>
+  <button class="action invert">Buy Now</button>
+  <button style="--bg-color: oklch(0.67 0.32 327); --fg-color: #fff">Use Locaton</button>
+
+</body>
+</html>

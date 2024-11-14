@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    /* Create a counter on a parent */
+    .counter {
+      /* initialize the counter with a name */
+      counter-reset: row-count;
+    }
+
+    .row::before {
+      /* increment the named counter */
+      counter-increment: row-count;
+      /* use the counter value */
+      content: counter(row-count, decimal-leading-zero);
+      font-size: 2rem;
+      font-weight: 900;
+    }
+
+    /* Seems like you can't use a counter for math */
+    .row {
+      padding: 2rem;
+      background-color: oklch(0.8 0.31 calc(counter(row-count) * 40));
+    }
+
+    .row:nth-child(counter(row-count)) {
+      counter-increment: row-count;
+      background-color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container counter">
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+    <div class="row"></div>
+  </div>
+
+</body>
+</html>
