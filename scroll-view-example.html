@@ -57,7 +57,9 @@
 
     @keyframes row-animation {
       0%   { opacity: 0.0; }
+      /* 25%  { opacity: 1.0; } */
       50%  { opacity: 1.0; }
+      /* 75%  { opacity: 1.0; } */
       100% { opacity: 0.0; }
     }
 
@@ -73,6 +75,8 @@
       animation-timeline: view();
       /* Starts when the element enters and ends when it exits */
       animation-range: entry exit-crossing;
+      animation-range-start: ;
+      /* animation-range-end: ; */
       /* timing function can adjust the effect */
       animation-timing-function: linear;
       /* animation-timing-function: ease-in-out; */

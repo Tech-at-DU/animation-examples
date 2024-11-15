@@ -6,8 +6,14 @@
   <title>Document</title>
   <style>
     :root {
+      /* Global */
       --primary-color: oklch(0.7 0.37 220);
       --foreground-color: oklch(1.0 0 0);
+      --any_name__I-like: Helvetica;
+      --x: 100;
+      --y: 99%;
+      /* var( --y ) */
+      /* var( --x ) */
     }
 
 
@@ -58,6 +64,57 @@
   <button class="warning invert">Delete</button>
   <button class="action invert">Buy Now</button>
   <button style="--bg-color: oklch(0.67 0.32 327); --fg-color: #fff">Use Locaton</button>
+  <button style="--bg-color:brown; --fg-color: white">Cookie</button>
+
+
+  <div class="card">
+    <img src="rose.jpg" alt="rose">
+    <div>
+      <h3>Rose</h3>
+      <p>Is a rose is a rose is 
+        a rose.</p>
+      <small><span>Etymology:</span> The name rose comes from Latin rosa, which was perhaps borrowed from Oscan, from Greek ῥόδον rhódon (Aeolic βρόδον wródon), itself borrowed from Old Persian wrd- (wurdi), related to Avestan varəδa, Sogdian ward, Parthian wâr.</small>
+    </div>
+  </div>
+
+  <style>
+    .card {
+      width: 300px;
+      margin: 2rem;
+      border-radius: 1rem;
+      overflow: hidden;
+      color: white;
+      position: relative;
+      line-height: 1.45;
+
+      & img {
+        width: 100%;
+      }
+
+      & > div {
+        position: absolute;
+        bottom: 0;
+        padding: 1rem;
+        /* size of this item! */
+        translate: 0 100%;
+        transition: 400ms;
+        background-image: linear-gradient(transparent, black );
+      }
+
+      &:hover > div {
+        translate: 0 0;
+      }
+
+      & h3 {
+        font-size: 3rem;
+        margin: 0 0 1rem 0;
+      }
+
+      & p {
+        font-size: 1.25rem;
+      }
+    }
+  </style>
 
 </body>
 </html>
