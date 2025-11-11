@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <style>
+    .view-port {
+      position: relative;
+      width: 500px;
+      height: 500px;
+      background-color: black;
+
+      perspective: 80px;
+    }
+
+    @property --z {
+      syntax: '<length>';
+      inherits: false;
+      initial-value: 0px;
+    }
+
+    .planet {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background-color: aqua;
+
+      --x: 0;
+      --y: 0;
+      --z: -600px;
+      --offset: 0px;
+
+      /* translate: var(--x) var(--y) var(--z); */
+      transform: translate3d(var(--x), var(--y), var(--z));
+
+      animation: space-travel 5s linear infinite forwards;
+    }
+
+    @keyframes space-travel {
+      from {
+        --z: 0px;
+      }
+
+      to {
+        --z: calc(-10000px + var(--offset));
+      }
+    }
+  </style>
+  
+  <div class="view-port">
+    <div class="planet"></div>
+    <div class="planet"></div>
+    <div class="planet"></div>
+    <div class="planet"></div>
+    <div class="planet"></div>
+  </div>
+
+  <script>
+    let planets = document.querySelectorAll('.planet')
+
+    planets.forEach(planet => {
+      let angle = Math.random() * Math.PI * 2
+      let x = Math.sin(angle) * 500
+      let y = Math.cos(angle) * 500
+      let z = Math.random() * 1000
+      planet.style.setProperty('--x', `${x}px`)
+      planet.style.setProperty('--y', `${y}px`)
+      planet.style.setProperty('--offset', `${z}px`)
+    })
+  </script>
+
+</body>
+</html>

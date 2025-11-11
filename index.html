@@ -14,6 +14,7 @@
       view()
       animation-range-start
       animation-range-end
+
     */
 
 /* Sme boilerplate styles */
@@ -69,6 +70,9 @@ Looks for these below */
 /* ***** Examples ***** */
 /* ******************** */
 
+
+
+
 /* ********************* */
 /* ***** Example 1 ***** */
 /* ********************* */
@@ -76,8 +80,8 @@ Looks for these below */
 /* This defines the key frames for an animation */
 /* NOTE: the name of this animation is: animation-1 */
 @keyframes animation-1 {
-  0% { translate: 45px 0 }
-  100% { translate: 45px 90px }
+  from { translate: 45px 0; }
+  to { translate: 45px 90px; }
 }
 
 .box-1 {
@@ -94,21 +98,27 @@ Looks for these below */
     translate: 45px 0;
     /* Assign the animation by name */
     animation-name: animation-1;
-    /* An animation will not unless you set a duration */
+    /* An animation will not unless you set a duration 
+    TODO: try changing the value here to smaller or larger number. */
     animation-duration: 1000ms;
-    /* Set the number of times the animation plays, try a number and 'infinite' */
+    /* Set the number of times the animation plays, try a number and 
+    'infinite'. TODO: try a number here like 3. */
     animation-iteration-count: infinite;
-    /* Set the direction of animation, try: reverse and alternate */
+    /* Set the direction of animation, TODO: try: reverse and alternate */
     animation-direction: alternate;
-    /* This sets the ending state for the animation, try: backwards */
+    /* This sets the ending state for the animation, try: backwards 
+    To see the effect of fill-mode you'll need to set count to a 
+    small number. Look at where the object starts and ends. */
     animation-fill-mode: forwards;
-    /* Add an easing function, try any easing function, ease, ease-in, ease-out etc.  */
+    /* Add an easing function, TODO: try any easing function, ease, 
+    ease-in, ease-out etc. TODO: try using the custom properties
+    --linear-spring and --linear-bounce here. */
     animation-timing-function: ease-in;
-    /* Set a delay before an animation starts, try any time like 3s, or 2000ms */
+    /* Set a delay before an animation starts, TODO: try any time like 
+    3s, or 2000ms */
     animation-delay: 0;
   }
 }
-
 
 
 /* ********************* */
@@ -128,7 +138,8 @@ Looks for these below */
     background-color: black;
     translate: 45px 0;
     /* *************************************************** */
-    /* You can use the same animation on other elements... */
+    /* You can use the same animation on other elements... 
+    TODO: try using animation-3 here. */
     animation-name: animation-1;
     /* and assignment them different property values */
     /* An animation will not unless you set a duration */
@@ -165,6 +176,19 @@ Looks for these below */
   100% { translate: 45px 45px; }
 }
 
+/* NOTE! You can also use "from" and "to" to set the 
+beginning and ending keyframes. For example: 
+
+@keyframes name {
+  from { ... }
+  to { ... }
+} 
+
+"from" is equivalent to 0%
+"to" is equivalent to 100% 
+
+*/
+
 .box-3 {
   position: relative;
   border: 1px solid;
@@ -180,7 +204,11 @@ Looks for these below */
     /* Assign the animation by name */
     animation-name: animation-3;
     animation-duration: 7s;
-    /* Try some of the other properties covered above here... */
+    /* TODO: Try some of the other properties covered above 
+    here. Try the default timing functions . 
+    Make your own timing function. Then try the default timing 
+    functions: ease, ease-in, ease-out, and ease-in-out. Last
+    try --linear-spring and --linear-bounce. */
     animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     animation-iteration-count: infinite;
   }
@@ -194,8 +222,8 @@ Looks for these below */
 
 /* This example reiterates the idea that animations can be reused */
 @keyframes animation-4 {
-  0%   { rotate: 0deg; }
-  100% { rotate: 360deg; }
+  from { rotate: 0deg; }
+  to   { rotate: 360deg; }
 }
 
 /* The example below creates 4 boxes, each with a ::before and ::after
@@ -294,8 +322,9 @@ Each animation uses different properties. */
 /* ********************* */
 
 /* Some properties don't transition smoothly.
-These properties animate in steps. If a property isn't numeric
-its likely you can't animate it smoothly. */
+These properties animate in steps. If a property isn't 
+numeric its likely you can't animate it smoothly. 
+*/
 @keyframes animation-5 {
   0%   { font-family: 'Times New Roman', Times, serif; }
   12%  { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
@@ -325,12 +354,151 @@ its likely you can't animate it smoothly. */
 }
 
 
-  </style>
+
+/* ********************* */
+/* ***** Example 6 ***** */
+/* ********************* */
+
+.box-6 {
+  width: 100px;
+  height: 100px;
+  border: 1px solid;
+  padding: 2rem;
+  position: relative;
+
+  & > button {
+    padding: 0.5rem 0.75rem;
+    border: none;
+    font-size: 1rem;
+    position: relative;
+    background-color: tomato;
+    border-radius: 0.25rem;
+    color: white;
+    box-shadow: 0 0 6px black;
+  }
+
+  & > button::before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 100px;
+    height: 100px;
+    left: 50%;
+    top: -100%;
+    translate: -50%;
+    scale: 0;
+    background-color: gold;
+    z-index: -1;
+    clip-path: polygon(100% 50%,95.75% 54.81%,98.91% 60.4%,93.75% 64.21%,95.68% 70.34%,89.84% 73%,90.45% 79.39%,84.18% 80.78%,83.46% 87.16%,77.04% 87.21%,75% 93.3%,68.71% 92.02%,65.45% 97.55%,59.56% 94.99%,55.23% 99.73%,50% 96%,44.77% 99.73%,40.44% 94.99%,34.55% 97.55%,31.29% 92.02%,25% 93.3%,22.96% 87.21%,16.54% 87.16%,15.82% 80.78%,9.55% 79.39%,10.16% 73%,4.32% 70.34%,6.25% 64.21%,1.09% 60.4%,4.25% 54.81%,0% 50%,4.25% 45.19%,1.09% 39.6%,6.25% 35.79%,4.32% 29.66%,10.16% 27%,9.55% 20.61%,15.82% 19.22%,16.54% 12.84%,22.96% 12.79%,25% 6.7%,31.29% 7.98%,34.55% 2.45%,40.44% 5.01%,44.77% 0.27%,50% 4%,55.23% 0.27%,59.56% 5.01%,65.45% 2.45%,68.71% 7.98%,75% 6.7%,77.04% 12.79%,83.46% 12.84%,84.18% 19.22%,90.45% 20.61%,89.84% 27%,95.68% 29.66%,93.75% 35.79%,98.91% 39.6%,95.75% 45.19%);
+    
+    /* Combine two animations. Separate all properties with a comma. */
+    animation-name: star, spin;
+    animation-duration: 1s, 10s;
+    animation-timing-function: ease-in, linear;
+    animation-fill-mode: forwards, forwards;
+    animation-iteration-count: 1, infinite;
+    animation-direction: forwards;
+  }
+}
+
+@keyframes star {
+  from { scale: 0; }
+  to   { scale: 1; }
+}
+
+@keyframes spin {
+  from { rotate: 0; }
+  to   { rotate: 360deg; }
+}
+
+
+
+
+
+/* ********************* */
+/* ***** Example 7 ***** */
+/* ********************* */
+
+.box-7 {
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  position: relative;
+
+  & > div { /* child divs */
+    width: 50px;
+    height: 50px;
+    background-color: limegreen;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* translate: -50% -50%; */
+    border-radius: 0 50% 50% 50%;
+    transform-origin: 0% 0%;
+    
+    /* You can assign the same properties to all elements */
+    animation-name: clover;
+    animation-duration: 10s;
+    animation-timing-function: var(--linear-spring);
+    animation-iteration-count: infinite;
+  }
+
+  & > div:nth-child(1) {
+    rotate: -135deg;
+    /* Assign unique properties to elements */
+    animation-delay: 400ms;
+  }
+
+  & > div:nth-child(2) {
+    rotate: -230deg;
+    /* Assign unique properties to elements */
+    animation-delay: 800ms;
+  }
+
+  & > div:nth-child(3) {
+    rotate: -40deg;
+    /* Assign unique properties to elements */
+    animation-delay: 1600ms;
+  }
+}
+
+@keyframes clover {
+  0%   { scale: 0; }
+  50%  { scale: 1; }
+  100% { scale: 1; } /* Create a pause in motion. */
+}
+
+/* Above the motion is applied for the first half of
+the animation. From 50% to 100% there is no change! 
+You can change the amount of motion and pause by changing
+50% to 25% or 75%. TODO: Change the values here and 
+observe the results. */
+
+
+
+
+
+
+/* ********************* */
+/* ***** Example 8 ***** */
+/* ********************* */
+
+/* Animate a custom property! */
+
+
+
+
+</style>
+
 </head>
 <body>
   <div class="container">
+
+    <h1>Animation</h1>
+    <div></div><div></div><div></div><div></div>
+
     <div>
-      Example-1
+      Example-1 - 
       <div class="box-1">
         <div></div>
       </div>
@@ -364,6 +532,33 @@ its likely you can't animate it smoothly. */
       Example-5
       <div class="box-5">
         <div>Hello</div>
+      </div>
+    </div>
+
+
+    <div>
+      Example-6
+      <div class="box-6"> 
+        <button class="">Hello</button>
+      </div>
+    </div>
+   
+
+    <div>
+      Example-7
+      <div class="box-7">
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
+    </div>
+
+    <div>
+      Example-8
+      <div class="box-8">
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
     </div>
     
