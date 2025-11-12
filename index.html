@@ -80,8 +80,9 @@ Looks for these below */
 /* This defines the key frames for an animation */
 /* NOTE: the name of this animation is: animation-1 */
 @keyframes animation-1 {
-  from { translate: 45px 0; }
-  to { translate: 45px 90px; }
+  /* TODO: change the values here see the results */
+  from { translate: 45px    0; }
+  to   { translate: 45px 90px; }
 }
 
 .box-1 {
@@ -99,23 +100,27 @@ Looks for these below */
     /* Assign the animation by name */
     animation-name: animation-1;
     /* An animation will not unless you set a duration 
+    
     TODO: try changing the value here to smaller or larger number. */
     animation-duration: 1000ms;
     /* Set the number of times the animation plays, try a number and 
-    'infinite'. TODO: try a number here like 3. */
+    'infinite'. 
+    TODO: try a number here like 3. */
     animation-iteration-count: infinite;
-    /* Set the direction of animation, TODO: try: reverse and alternate */
+    /* Set the direction of animation, 
+    TODO: try: reverse and alternate */
     animation-direction: alternate;
     /* This sets the ending state for the animation, try: backwards 
     To see the effect of fill-mode you'll need to set count to a 
-    small number. Look at where the object starts and ends. */
+    small number. Look at where the object starts and ends. 
+    TODO: change forwards to backwards, observe what happens. */
     animation-fill-mode: forwards;
     /* Add an easing function, TODO: try any easing function, ease, 
-    ease-in, ease-out etc. TODO: try using the custom properties
+    ease-in, ease-out etc. Try using the custom properties
     --linear-spring and --linear-bounce here. */
     animation-timing-function: ease-in;
-    /* Set a delay before an animation starts, TODO: try any time like 
-    3s, or 2000ms */
+    /* Set a delay before an animation starts, 
+    TODO: try any time like 3s, or 2000ms */
     animation-delay: 0;
   }
 }
@@ -204,6 +209,7 @@ beginning and ending keyframes. For example:
     /* Assign the animation by name */
     animation-name: animation-3;
     animation-duration: 7s;
+
     /* TODO: Try some of the other properties covered above 
     here. Try the default timing functions . 
     Make your own timing function. Then try the default timing 
@@ -434,29 +440,37 @@ numeric its likely you can't animate it smoothly.
     top: 50%;
     /* translate: -50% -50%; */
     border-radius: 0 50% 50% 50%;
-    transform-origin: 0% 0%;
+    /* Use transform origin to move the point of transformation. 
+    These objects animate from the upper left corner! This places
+    the point of transform at the pointy tip. The objects have been
+    rotated so it may not appear as the upper left. 
+    TODO: change the values below, try any value from 0 to 100%. */
+    transform-origin: 0 0;
     
     /* You can assign the same properties to all elements */
     animation-name: clover;
     animation-duration: 10s;
-    animation-timing-function: var(--linear-spring);
+    animation-timing-function: ease-in-out;
     animation-iteration-count: infinite;
+    animation-direction: alternate;
   }
 
   & > div:nth-child(1) {
-    rotate: -135deg;
+    background-color: tomato;
+    rotate: 0;
     /* Assign unique properties to elements */
     animation-delay: 400ms;
   }
 
   & > div:nth-child(2) {
-    rotate: -230deg;
+    background-color: gold;
+    rotate: 120deg;
     /* Assign unique properties to elements */
     animation-delay: 800ms;
   }
 
   & > div:nth-child(3) {
-    rotate: -40deg;
+    rotate: 240deg;
     /* Assign unique properties to elements */
     animation-delay: 1600ms;
   }
@@ -485,7 +499,93 @@ observe the results. */
 
 /* Animate a custom property! */
 
+.box-8 {
+  border: 1px solid;
+  width: 200px;
+  height: 200px;
+  position: relative;
 
+  & > div {
+    position: absolute;
+    border-style: solid;
+    border-width: 10px;
+    border-bottom: none;
+    transform-origin: 50% 100%;
+    left: 50%;
+    bottom: 50%;
+    translate: -50% 50%;
+
+    width: 100px;
+    height: 50px;
+    border-radius: 60px 60px 0 0;
+
+    animation-name: rainbow;
+    animation-duration: 10s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    --hue: 0;
+  }
+
+  & > div:nth-child(1) {
+    --offset: 0;
+    border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 90%, 50%);
+  }
+
+  & > div:nth-child(2) {
+    width: 80px;
+    height: 40px;
+    bottom: calc(50% - 5px);
+    --offet: 72;
+    /* border-color: hsl(calc(var(--hue) + var(--offset)), 90%, 50%); */
+    border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 90%, 50%);
+  }
+
+  & > div:nth-child(3) {
+    width: 60px;
+    height: 30px;
+    bottom: calc(50% - 10px);
+    --offset: 144;
+    /* border-color: hsl(calc(var(--hue) + var(--offset)), 100%, 50%); */
+    border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 90%, 50%);
+  }
+
+  & > div:nth-child(4) {
+    width: 40px;
+    height: 20px;
+    bottom: calc(50% - 15px);
+    --offset: 216;
+    /* border-color: hsl(calc(var(--hue) + var(--offset)), 100%, 50%); */
+     border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 90%, 50%);
+  }
+
+  & > div:nth-child(5) {
+    width: 20px;
+    height: 10px;
+    bottom: calc(50% - 20px);
+    --offset: 288;
+    /* border-color: hsl(calc(var(--hue) + var(--offset)), 100%, 50%); */
+     border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 100%, 50%);
+  }
+  
+}
+
+@keyframes rainbow {
+  0%   { --hue: 0; }
+  100% { --hue: 360; }
+}
+
+@property --hue {
+  initial-value: 0;
+  inherits: false;
+  syntax: '<number>';
+}
+
+@property --offset {
+  initial-value: 0;
+  inherits: false;
+  syntax: '<number>';
+}
 
 
 </style>
@@ -556,6 +656,8 @@ observe the results. */
     <div>
       Example-8
       <div class="box-8">
+        <div></div>
+        <div></div>
         <div></div>
         <div></div>
         <div></div>
