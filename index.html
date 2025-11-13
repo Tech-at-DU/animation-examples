@@ -586,15 +586,9 @@ observe the results. */
 
 
 
-
-
-
-
-
-
-
-
-
+/* ********************* */
+/* ***** Example 9 ***** */
+/* ********************* */
 
 /* Animate a custom property! */
 
@@ -627,64 +621,26 @@ observe the results. */
   }
 
   & > div:nth-child(1) {
-    --offset: 0;
-    border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 90%, 50%);
+    border-color: hsl(var(--hue), 90%, 50%);
   }
 
-  & > div:nth-child(2) {
-    width: 80px;
-    height: 40px;
-    bottom: calc(50% - 5px);
-    --offet: 72;
-    /* border-color: hsl(calc(var(--hue) + var(--offset)), 90%, 50%); */
-    border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 90%, 50%);
-  }
-
-  & > div:nth-child(3) {
-    width: 60px;
-    height: 30px;
-    bottom: calc(50% - 10px);
-    --offset: 144;
-    /* border-color: hsl(calc(var(--hue) + var(--offset)), 100%, 50%); */
-    border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 90%, 50%);
-  }
-
-  & > div:nth-child(4) {
-    width: 40px;
-    height: 20px;
-    bottom: calc(50% - 15px);
-    --offset: 216;
-    /* border-color: hsl(calc(var(--hue) + var(--offset)), 100%, 50%); */
-     border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 90%, 50%);
-  }
-
-  & > div:nth-child(5) {
-    width: 20px;
-    height: 10px;
-    bottom: calc(50% - 20px);
-    --offset: 288;
-    /* border-color: hsl(calc(var(--hue) + var(--offset)), 100%, 50%); */
-     border-color: hsl(mod(calc(var(--hue) + var(--offset)), 360), 100%, 50%);
-  }
   
 }
 
+/* To animate a custom property, use key frames. */
 @keyframes rainbow {
   0%   { --hue: 0; }
   100% { --hue: 360; }
 }
 
+/* Some properties won't animate. When this happens you 
+can set the syntax/type of the custom property like this. */
 @property --hue {
   initial-value: 0;
   inherits: false;
-  syntax: '<number>';
+  syntax: '<number>'; /* This property is now a number and will animate smoothly */
 }
 
-@property --offset {
-  initial-value: 0;
-  inherits: false;
-  syntax: '<number>';
-}
 
 
 </style>
@@ -760,6 +716,15 @@ observe the results. */
             <div></div>  
           </div>  
         </div>
+      </div>
+    </div>
+
+
+    <div>
+      Example-9
+
+      <div class="box-9">
+        <div></div>  
       </div>
     </div>
     
